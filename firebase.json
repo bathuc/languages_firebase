@@ -1,0 +1,6 @@
+{
+  "hosting": {
+    "site": "mylanguages",
+    "public": "dist"
+  }
+}
