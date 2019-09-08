@@ -1,5 +1,5 @@
 <template>
-  <div class="wrapper bg-img">
+  <div class="login-wrapper bg-img">
       <form id="frmForm" v-on:submit.prevent="doLogin">
           <div class="login-box">
               <div class="login-row form-group row">
@@ -37,7 +37,6 @@
                       <button type="button" class="btn-submit" @click="doLogin">Login</button>
                   </div>
               </div>
-
           </div>
       </form>
   </div>
@@ -52,7 +51,7 @@
 
     export default {
       components: {
-          Loading
+          Loading,
       },
       data(){
           return {
@@ -104,17 +103,19 @@
 </script>
 <style lang="scss">
 
-    .wrapper{
+    .login-wrapper{
         width: 100%;
         height: 100vh;
         box-sizing: border-box;
+        display: flex;
+        justify-content: center;
+        align-items: center;
     }
 
     #frmForm{
         width: 500px;
         padding: 20px 40px;
         background: white;
-        margin: auto;
     }
 
     .login-row{
