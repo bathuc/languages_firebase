@@ -7,12 +7,10 @@ export default async function ({ store, redirect, route, res}) {
     let isEmptyUser = helpers.isEmptyObject(user);
     var validTokenFlg = true;
 
-    console.log('user authen', user);
-
     // user has data
     if(!isEmptyUser){
         let adminAccount = await admin.getDataByEmail(user.email);
-        console.log('admin', adminAccount);
+
         let emptyAdmin = helpers.isEmptyObject(admin);
         if (!emptyAdmin) {
             // adminLog has data
@@ -38,6 +36,6 @@ export default async function ({ store, redirect, route, res}) {
 
     if(!validTokenFlg){
         await store.commit('removeUser');
-        return redirect('/login')
+        return redirect('/admin/login')
     }
 }

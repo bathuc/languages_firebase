@@ -27,12 +27,6 @@
 			  return this.$store.state.currentRoute.route;
 		  },
 	  },
-		watch: {
-			currentRoute(newValue, oldValue) {
-		    console.log('current route 2', this.$route.fullPath);
-				return newValue;
-			},
-		},
 		methods: {
 			wordsClick() {
 				this.$router.push('/admin/words');
