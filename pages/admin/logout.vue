@@ -28,7 +28,7 @@
                 await admin.refreshToken(user.email);
             }
             this.$store.commit('removeUser');
-            this.$router.push('/login');
+            this.$router.push('/admin/login');
         },
     }
 </script>

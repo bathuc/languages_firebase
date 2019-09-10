@@ -62,6 +62,12 @@
               showLoading:false,
           }
       },
+      created(){
+      	var user = this.$store.state.user;
+        if(user.hasOwnProperty('email')){
+          this.$router.push('/admin/dashboard')
+        }
+      },
       methods:{
           async doLogin(){
               this.message = '';
