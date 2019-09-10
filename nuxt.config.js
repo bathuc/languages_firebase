@@ -24,6 +24,8 @@ export default {
   ** Global CSS
   */
   css: [
+    { src: 'material-design-icons-iconfont/dist/material-design-icons.css', lang: 'css' },
+    '@/assets/css/style.scss',
   ],
   /*
   ** Plugins to load before mounting the App
@@ -41,9 +43,9 @@ export default {
   */
   modules: [
     // Doc: https://bootstrap-vue.js.org/docs/
-    'bootstrap-vue/nuxt',
     '@nuxtjs/axios',
     '@nuxtjs/dotenv',
+    'bootstrap-vue/nuxt',
   ],
   /*
   ** Build configuration

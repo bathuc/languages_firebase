@@ -1,6 +1,8 @@
 import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
+import currentRoute from './currentRoute';
+
 const createStore = () => {
     return new Vuex.Store({
         state: () => ({
@@ -27,7 +29,10 @@ const createStore = () => {
         },
         plugins: [
             createPersistedState(),
-        ]
+        ],
+        modules: {
+          currentRoute: currentRoute
+        }
     })
 }
 

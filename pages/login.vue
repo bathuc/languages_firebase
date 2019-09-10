@@ -29,7 +29,6 @@
                       <p class="text-danger"> {{ message}}</p>
                   </div>
               </div>
-              <Loading :showLoading="this.showLoading" />
 
               <div class="login-row form-group row">
                   <label class="col-md-3 text-success"></label>
@@ -37,6 +36,8 @@
                       <button type="button" class="btn-submit" @click="doLogin">Login</button>
                   </div>
               </div>
+
+              <Loading :showLoading="this.showLoading" />
           </div>
       </form>
   </div>
