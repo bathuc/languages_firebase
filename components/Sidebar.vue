@@ -3,7 +3,7 @@
     <div class="app-title">
       Languages
     </div>
-    <div class="account-picture">
+    <div class="account-picture" @click="dashboarClick">
       <i class="material-icons user-icon"> account_circle </i>
       <span>Admin</span>
     </div>
@@ -33,6 +33,9 @@
 			},
       subjectsClick() {
         this.$router.push('/admin/subjects');
+      },
+      dashboarClick(){
+		    this.$router.push('/admin/dashboard');
       }
 		}
 	}

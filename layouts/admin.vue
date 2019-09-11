@@ -4,9 +4,7 @@
     <div class="main-wrapper">
       <Navbar/>
 
-      <div class="conten-wrapper">
-        <nuxt/>
-      </div>
+      <nuxt/>
 
     </div>
   </div>
@@ -33,8 +31,5 @@
   .main-wrapper{
     width: 100%;
     background: #f4f6f9;
-  }
-  .conten-wrapper{
-    padding: 0 0.5rem;
   }
 </style>

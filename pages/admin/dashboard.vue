@@ -1,7 +1,8 @@
 <template>
-  <div class="wrapper">
-      Dashboard
-      <a href="/admin/logout">logout</a>
+  <div class="content-wrapper">
+    <div class="content-header">
+      <h3>Dashboard</h3>
+    </div>
   </div>
 </template>
 
@@ -12,4 +13,7 @@ export default {
 }
 </script>
 
+<style lang="scss" scoped>
+
+</style>
 
