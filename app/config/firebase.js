@@ -7,7 +7,7 @@ const firebaseConfig = {
     projectId: process.env.FIREBASE_PROJECT_ID,
     storageBucket: process.env.FIREBASE_STORAGE_BUCKET,
     messagingSenderId: process.env.FIREBASE_MESSAGE_SENDER_ID,
-  };
+};
 
 if (!firebase.apps.length) {
     firebase.initializeApp(firebaseConfig)

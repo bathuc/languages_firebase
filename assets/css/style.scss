@@ -42,6 +42,12 @@
   .form-wrapper {
     margin: 5% 10%;
   }
+
+  .box-title{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
 }
 
 .btn-blue {

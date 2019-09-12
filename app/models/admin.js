@@ -1,26 +1,28 @@
 'use strict'
 import helpers from "@/app/helpers/helpers";
+
 const firebase = require('@/app/config/firebase');
 
 export default {
     collection: "admin",
 
-    async getDocumentByEmail(email){
+    async getDocumentByEmail(email) {
         var query = await firebase.fs.collection(this.collection)
-                            .where('email','==', email)
-                            .get();
+        .where('email', '==', email)
+        .get();
         var docId = '';
-        try{
+        try {
             docId = await query.docs[0].id;
-        }catch (e) {}
+        } catch (e) {
+        }
 
-        return  docId;
+        return docId;
     },
 
-    async getDataByEmail(email){
+    async getDataByEmail(email) {
         var query = await firebase.fs.collection(this.collection)
-                                .where('email','==', email)
-                                .get();
+        .where('email', '==', email)
+        .get();
         let docs = await query.docs;
         // not empty
         if (!helpers.isEmptyObject(docs)) {
@@ -36,7 +38,7 @@ export default {
         return {};
     },
 
-    async getDataById(id){
+    async getDataById(id) {
         var doc = await firebase.fs.collection(this.collection).doc(id).get();
         // not empty
         if (!helpers.isEmptyObject(doc)) {
@@ -46,28 +48,27 @@ export default {
         return {};
     },
 
-    async updateFieldsByEmail(email,fields){
+    async updateFieldsByEmail(email, fields) {
         var document = await this.getDocumentByEmail(email);
-        if(document){
+        if (document) {
             await firebase.fs.collection(this.collection).doc(document).update(fields)
         }
     },
 
-    async saveAdmin(inputs){
+    async saveAdmin(inputs) {
         console.log('inputs', inputs);
         await firebase.fs.collection(this.collection).add(inputs);
     },
 
-    async refreshToken(email){
+    async refreshToken(email) {
         try {
-            var fields ={
+            var fields = {
                 token: helpers.getToken()
             }
-            await this.updateFieldsByEmail(email,fields);
+            await this.updateFieldsByEmail(email, fields);
+        } catch (e) {
+
         }
-        catch (e) {
-            
-        }
-        
+
     }
 }
