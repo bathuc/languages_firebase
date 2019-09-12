@@ -86,8 +86,6 @@ export default {
         return a result object
      */
     getPaginationInfo(dataArray, page = 1, itemPerPage = 12, pagNumber = 4) {
-        console.log('itempp', itemPerPage);
-        console.log('dataArray', typeof dataArray);
         var result = {
             'back': false,
             'next': false,
@@ -99,17 +97,10 @@ export default {
         };
 
         if (typeof dataArray != 'object') {
-            console.log('vao return');
             return result;
         }
 
         var length = dataArray.length;
-        console.log('dataArray', dataArray);
-        console.log('dataArray 123', Object.keys(dataArray).length);
-        console.log('dataArray length', dataArray.length);
-        console.log('dataArray length123', length);
-        console.log('itemPerPage', itemPerPage);
-        console.log('totalPage', totalPage);
         var totalPage = Math.ceil(length / itemPerPage);
         if (totalPage == 0) {
             result.data = dataArray;
