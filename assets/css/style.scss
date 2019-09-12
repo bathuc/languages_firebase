@@ -1,21 +1,22 @@
 
-.content-header{
+.content-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin: 10px;
 }
 
-.form-search-wrapper{
+.form-search-wrapper {
   display: flex;
   align-items: center;
-  input{
+
+  input {
     width: 200px;
     margin: 0 20px;
   }
 }
 
-.content-meta{
+.content-meta {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,9 +37,10 @@
   padding: 10px;
   margin-bottom: 20px;
   width: 100%;
-  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
-  .form-wrapper{
-    margin: 50px 0 50px 150px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+
+  .form-wrapper {
+    margin: 5% 10%;
   }
 }
 
@@ -47,7 +49,8 @@
   border-color: #367fa9;
   color: white;
 }
-.btn-blue:hover{
-  background-color:#367fa9;
+
+.btn-blue:hover {
+  background-color: #367fa9;
   color: white;
 }

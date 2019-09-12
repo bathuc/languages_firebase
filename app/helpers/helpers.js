@@ -5,7 +5,7 @@ export default {
         return Date.now()
     },
 
-    getExpireTimestamp(hour=3){
+    getExpireTimestamp(hour=8){
         var date = new Date();
         date.setHours( date.getHours() + hour );
         return date.getTime();

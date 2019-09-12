@@ -29,6 +29,13 @@ const createStore = () => {
         },
         plugins: [
             createPersistedState(),
+            /*createPersistedState({
+                  storage: {
+                      getItem: key => Cookies.get(key),
+                      setItem: (key, value) => Cookies.set(key, value, { expires: 3, secure: false }),
+                      removeItem: key => Cookies.remove(key)
+                  }
+              })*/
         ],
         modules: {
           currentRoute: currentRoute
