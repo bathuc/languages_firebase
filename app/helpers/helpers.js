@@ -85,7 +85,7 @@ export default {
     /*
         return a result object
      */
-    getPaginationInfo(dataArray, page = 1, itemPerPage = 8, pagNumber = 5) {
+    getPaginationInfo(dataArray, page = 1, itemPerPage = 12, pagNumber = 8) {
         var result = {
             'back': false,
             'next': false,

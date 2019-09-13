@@ -103,30 +103,21 @@
                     this.messageEnglish = '';
                     this.messageViet = '';
 
-                    var isExitNameEn = await subject.isExitNameEn(this.nameEnglish);
-                    var isExitNameVi = await subject.isExitNameVi(this.nameViet);
-
-                    if (isExitNameEn) {
-                        this.messageEnglish = 'Name English already exit';
-                    } else if (isExitNameVi) {
-                        this.messageViet = 'Name Viet already exit';
-                    } else {
-                        var id = this.subjectId;
-                        var inputs = {
-                            name_en: this.nameEnglish,
-                            name_vi: this.nameViet,
-                            update_at: Date.now(),
-                        }
-                        await subject.updateFieldsById(id, inputs);
-                        this.showLoading = false;
-                        let toast = this.$toasted.show('Update Subject successfully.', {
-                            theme: "toasted-primary",
-                            type: "success",
-                            icon: "delete",
-                            position: "top-center",
-                            duration: 4000
-                        });
+                    var id = this.subjectId;
+                    var inputs = {
+                        name_en: this.nameEnglish,
+                        name_vi: this.nameViet,
+                        update_at: Date.now(),
                     }
+                    await subject.updateFieldsById(id, inputs);
+                    this.showLoading = false;
+                    let toast = this.$toasted.show('Update Subject successfully.', {
+                        theme: "toasted-primary",
+                        type: "success",
+                        icon: "delete",
+                        position: "top-center",
+                        duration: 4000
+                    });
                 }
                 this.showLoading = false;
             }
