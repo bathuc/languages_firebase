@@ -3,14 +3,14 @@
         <div class="app-title">
             Languages
         </div>
-        <div class="account-picture" @click="dashboarClick">
+        <div class="account-picture" @click="dashboardClick">
             <i class="material-icons user-icon"> account_circle </i>
             <span>Admin</span>
         </div>
 
         <ul class="sidebar-menu">
-            <li :class="currentRoute.includes('/admin/subjects')? 'active':''" @click="subjectsClick">Subjects</li>
-            <li :class="currentRoute.includes('/admin/words')? 'active':'' " @click="wordsClick">Words</li>
+            <li :class="currentRoute.includes('/admin/subject')? 'active':''" @click="subjectClick">Subjects</li>
+            <li :class="currentRoute.includes('/admin/word')? 'active':'' " @click="wordClick">Words</li>
         </ul>
     </div>
 </template>
@@ -27,13 +27,13 @@
             },
         },
         methods: {
-            wordsClick() {
-                this.$router.push('/admin/words');
+            wordClick() {
+                this.$router.push('/admin/word');
             },
-            subjectsClick() {
-                this.$router.push('/admin/subjects');
+            subjectClick() {
+                this.$router.push('/admin/subject');
             },
-            dashboarClick() {
+            dashboardClick() {
                 this.$router.push('/admin/dashboard');
             }
         }

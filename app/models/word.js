@@ -7,14 +7,42 @@ const firebase = require('@/app/config/firebase');
 export default {
     collection: "word",
 
-    async getDataById(id) {
-        var doc = await firebase.fs.collection(this.collection).doc(id).get();
+    async getDataByDocId(docId) {
+        var doc = await firebase.fs.collection(this.collection).doc(docId).get();
         // not empty
         if (!helpers.isEmptyObject(doc)) {
             return doc.data();
         }
 
         return {};
+    },
+
+    async getDocumentById(id){
+        var idInt = parseInt(id);
+        var query = await firebase.fs.collection(this.collection)
+                            .where('id', '==', idInt)
+                            .get();
+
+        var docs = query.docs;
+        if (!helpers.isEmptyObject(docs)) {
+            return docs[0].id;
+        } else {
+            return false;
+        }
+    },
+
+    async getWordById(id) {
+        var idInt = parseInt(id);
+        var query = await firebase.fs.collection(this.collection)
+                            .where('id', '==', idInt)
+                            .get();
+        var docs = query.docs;
+
+        if (!helpers.isEmptyObject(docs)) {
+            return docs[0].data();
+        } else {
+            return false;
+        }
     },
 
     async getIncreamentId() {
@@ -32,8 +60,8 @@ export default {
 
     async isExitWord(wordItem) {
         var query = await firebase.fs.collection(this.collection)
-        .where('word', '==', wordItem)
-        .get();
+                            .where('word', '==', wordItem)
+                            .get();
         var docs = query.docs;
 
         if (!helpers.isEmptyObject(docs)) {
@@ -41,6 +69,11 @@ export default {
         } else {
             return false;
         }
+    },
+
+    async updateFieldsById(id,fields){
+        var document = await this.getDocumentById(id);
+        await firebase.fs.collection(this.collection).doc(document).update(fields)
     },
 
     async insert(inputs) {

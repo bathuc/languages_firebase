@@ -16,15 +16,15 @@
         <div class="box">
             <div class="box-title">
                 <span>Word Infomation</span>
-                <ul class="pagination" v-if="wordList.length">
+                <ul class="pagination" v-if="paginationInfo.is_pagination">
                     <li :class="paginationInfo.back? '': 'disabled' " class="page-item "><span class="page-link" @click="clickBack">Previous</span></li>
-                    <li v-for="index in (paginationInfo.first_index, paginationInfo.last_index)" :class="index==paginationInfo.current_page? 'active' : ''" class="page-item "><span class="page-link" @click="pageClick(index)">{{ index}}</span></li>
+                    <li v-for="index in paginationInfo.item_index" :class="index==paginationInfo.current_page? 'active' : ''" class="page-item "><span class="page-link" @click="pageClick(index)">{{ index}}</span></li>
                     <li :class="paginationInfo.next? '': 'disabled' " class="page-item "><span class="page-link" @click="clickNext">Next</span></li>
                 </ul>
             </div>
 
             <div class="box-content"  v-if="paginationInfo.data">
-                <table class="table">
+                <table class="table table-hover">
                     <thead>
                         <tr>
                             <th>id</th>
@@ -35,7 +35,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr v-for="dataItem in paginationInfo.data">
+                        <tr v-for="dataItem in paginationInfo.data" @click="clickEditWord(dataItem.id)">
                             <td >{{ dataItem.id }}</td>
                             <td >{{ dataItem.word }}</td>
                             <td >{{ dataItem.meaning }}</td>
@@ -67,20 +67,16 @@
         },
         async created(){
             this.wordList = await word.getWordList();
-            console.log('word list', this.wordList);
-            console.log('word list length', this.wordList.length);
-            this.paginationInfo = await helpers.getPaginationInfo(this.wordList, this.page, 3, 4);
-            console.log('data', this.paginationInfo);
-            var name = await subject.getSubjectNameFromId(1);
-            console.log('name', name);
+            this.paginationInfo = await helpers.getPaginationInfo(this.wordList, this.page);
+            console.log('this.paginationInfo', this.paginationInfo);
         },
         methods: {
             newWordClick() {
-                this.$router.push('/admin/words/new');
+                this.$router.push('/admin/word/new');
             },
             async pageClick(page){
                 this.page = page;
-                this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page, 3);
+                this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page);
             },
 
             clickBack(){
@@ -89,7 +85,7 @@
                 }
                 else{
                     this.page -= 1;
-                    this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page, 3);
+                    this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page);
                 }
             },
 
@@ -99,8 +95,12 @@
                 }
                 else{
                     this.page += 1;
-                    this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page, 3, 4);
+                    this.paginationInfo = helpers.getPaginationInfo(this.wordList, this.page);
                 }
+            },
+            clickEditWord(id){
+                console.log('id',id);
+                this.$router.push('/admin/word/edit/'+id);
             }
         }
     }

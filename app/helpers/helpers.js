@@ -85,12 +85,13 @@ export default {
     /*
         return a result object
      */
-    getPaginationInfo(dataArray, page = 1, itemPerPage = 12, pagNumber = 4) {
+    getPaginationInfo(dataArray, page = 1, itemPerPage = 8, pagNumber = 5) {
         var result = {
             'back': false,
             'next': false,
             'first_index': 1,
             'last_index': 1,
+            'item_index': [],
             'current_page': page,
             'is_pagination': 0,
             data: [],
@@ -102,7 +103,7 @@ export default {
 
         var length = dataArray.length;
         var totalPage = Math.ceil(length / itemPerPage);
-        if (totalPage == 0) {
+        if (totalPage == 1) {
             result.data = dataArray;
             return result;
         }
@@ -157,6 +158,11 @@ export default {
         }
 
         result.data = data;
+
+        // map index
+        for (var i = result.first_index; i <= result.last_index; i++) {
+            result.item_index.push(i);
+        }
 
         return result;
     }

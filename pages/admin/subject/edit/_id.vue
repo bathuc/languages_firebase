@@ -2,11 +2,11 @@
     <div class="content-wrapper">
 
         <div class="content-header">
-            <h4>Subject New</h4>
+            <h4>Subject Edit</h4>
         </div>
 
         <div class="content-meta">
-            <span>Create new subject</span>
+            <span>Edit Subject</span>
             <button type="button" class="btn btn-blue" @click="backClick">Back</button>
         </div>
 
@@ -36,40 +36,58 @@
                 <div class="form-group row">
                     <label class="col-md-3"></label>
                     <div class="col-md-9">
-                        <button type="button" class="btn btn-blue" @click="createSubjectClick">Create</button>
+                        <button type="button" class="btn btn-blue" @click="editSubjectClick">Edit</button>
                     </div>
                 </div>
             </div>
+
+            <Loading :showLoading="this.showLoading"/>
         </div>
     </div>
 </template>
 
 <script>
+    import subject from '@/app/models/subject';
+    import word from '@/app/models/word';
+    import helpers from "@/app/helpers/helpers";
+    import Loading from '@/components/Loading';
 
-    import subject from "../../../app/models/subject";
+    import Vue from 'vue';
+    import Toasted from 'vue-toasted';
+    Vue.use(Toasted);
 
     export default {
         layout: 'admin',
+        components: {
+            Loading,
+        },
         data() {
             return {
+                subjectId: '',
                 messageEnglish: '',
                 messageViet: '',
                 nameEnglish: '',
                 nameViet: '',
+                showLoading: false,
             }
         },
-        async created() {
-            var id = await subject.getIncreamentId();
-            var isExitNameVi = await subject.isExitNameVi('Phổ Biến12');
-
-            console.log('id ', id);
-            console.log('isExitNameVi 12', isExitNameVi);
+        async mounted() {
+            this.subjectId = this.$route.params.id;
+            var subjectObject = await subject.getSubjectById(this.subjectId);
+            if(!subjectObject){
+                this.$router.push('/admin/subject');
+            }
+            console.log('subjectObject', subjectObject);
+            this.nameEnglish = subjectObject.name_en;
+            this.nameViet = subjectObject.name_vi;
         },
         methods: {
             backClick() {
                 this.$router.push('/admin/subject');
             },
-            async createSubjectClick() {
+            async editSubjectClick() {
+                this.showLoading = true;
+
                 if (!this.nameEnglish || !this.nameViet) {
                     if (!this.nameEnglish) {
                         this.messageEnglish = 'Name English is required';
@@ -93,19 +111,24 @@
                     } else if (isExitNameVi) {
                         this.messageViet = 'Name Viet already exit';
                     } else {
-                        var id = await subject.getIncreamentId();
+                        var id = this.subjectId;
                         var inputs = {
-                            id: id,
                             name_en: this.nameEnglish,
                             name_vi: this.nameViet,
-                            created_at: Date.now(),
+                            update_at: Date.now(),
                         }
-
-                        await subject.insert(inputs);
-                        this.$router.push('/admin/subjects');
+                        await subject.updateFieldsById(id, inputs);
+                        this.showLoading = false;
+                        let toast = this.$toasted.show('Update Subject successfully.', {
+                            theme: "toasted-primary",
+                            type: "success",
+                            icon: "delete",
+                            position: "top-center",
+                            duration: 4000
+                        });
                     }
-                    console.log('word', this.word);
                 }
+                this.showLoading = false;
             }
         }
     }

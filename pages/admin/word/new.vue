@@ -70,7 +70,6 @@
 
     import Vue from 'vue';
     import Toasted from 'vue-toasted';
-
     Vue.use(Toasted);
 
     export default {
@@ -100,7 +99,7 @@
         },
         methods: {
             backClick() {
-                this.$router.push('/admin/words');
+                this.$router.push('/admin/word');
             },
             async createWordClick() {
                 this.showLoading = true;
