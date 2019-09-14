@@ -85,7 +85,7 @@
                 wordTable: [],
                 wordList: [],
                 wordItemRender: '',
-                time: 2,
+                time: 4,
                 paginationInfo: [],
                 subjectId: 1,
                 subjectOption: [],
@@ -99,9 +99,23 @@
             this.wordList = await word.getWordListBySubjectId(this.subjectId);
             this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
             this.wordItemRender = this.wordTable.data[0];
-            console.log('wordTable', this.wordTable);
         },
+        mounted() {
+            var me = this;
+            window.addEventListener('keydown', function(event) {
+                // right arrow, click next word
+                if (event.keyCode === 39) {
+                    me.nextWord();
+                }
+            });
 
+            window.addEventListener('keydown', function(event) {
+                // right down, click next word
+                if (event.keyCode === 40) {
+                    me.soundClick();
+                }
+            });
+        },
         watch:{
              wordNumber: function(newValue){
                 var number = parseInt(newValue);
@@ -117,7 +131,6 @@
                     this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
                     this.soundClick();
                 }
-                console.log('word table', this.wordTable);
             },
             subjectId: async function(newValue){
                 this.wordNumber = 1;
@@ -130,8 +143,8 @@
         methods: {
             async nextWord(){
                 this.wordItemRender = helpers.getRandomValues(this.wordTable.data);
-                console.log('this.wordTable.data', this.wordTable.data);
-                console.log('wordItemRender', this.wordItemRender);
+                // console.log('this.wordTable.data', this.wordTable.data);
+                // console.log('wordItemRender', this.wordItemRender);
                 await this.soundClick();
             },
             async clickItem(index){
