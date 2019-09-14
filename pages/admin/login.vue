@@ -32,8 +32,9 @@
 
                 <div class="login-row form-group row">
                     <label class="col-md-3 text-success"></label>
-                    <div class="col-md-9">
+                    <div class="col-md-9 d-flex justify-content-between">
                         <button type="button" class="btn-submit" @click="doLogin">Login</button>
+                        <span class="homeLink" @click="homeClick">Home</span>
                     </div>
                 </div>
 
@@ -103,6 +104,9 @@
                     this.showLoading = false;
                 }
 
+            },
+            homeClick(){
+                this.$router.push('/');
             }
         }
     }
@@ -148,4 +152,8 @@
         background-size: cover;
     }
 
+    .homeLink{
+        color: #007bff;
+        cursor: pointer;
+    }
 </style>
