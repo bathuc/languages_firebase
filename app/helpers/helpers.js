@@ -178,14 +178,32 @@ export default {
 
         // map index & data
         var itemIndex = [];
-        var data = [];
+        var data = []; var tableRender = [];
+        var j = 1; var temp = [];
         for (var i = firstIndex; i <= lastIndex; i++) {
-            itemIndex.push(i);
-            data[i] = dataArray[i];
+            if(dataArray[i]){
+                itemIndex.push(i);
+                data[i] = dataArray[i];
+                var objectItem = {
+                    index: i,
+                    word_item: dataArray[i]
+                };
+                temp.push(objectItem);
+                if(temp.length === 5){
+                    tableRender.push(temp);
+                    temp = [];
+                }
+            }
+        }
+
+        if(temp.length > 0){
+            tableRender.push(temp);
+            temp = [];
         }
 
         result.item_index = itemIndex;
         result.data = data;
+        result.tableRender = tableRender;
 
         // map select box
         var selectBox = [];
@@ -205,14 +223,32 @@ export default {
         return result;
     },
 
-    getSortRandomArray(array) {
+    getRandomArray(array) {
         var tempArray = [...array];
         tempArray.sort(function(a, b){return Math.random() - Math.random()});
         return tempArray;
     },
 
+    getRandInteger(min, max) {
+        var minValue = parseInt(min);
+        var maxValue = parseInt(max);
+        return Math.floor(Math.random() * (maxValue - minValue)) + minValue;
+    },
+
     getRandomValues(array) {
-        var rand = array[Math.floor(Math.random() * array.length)];
-        return rand;
+        var minIndex, maxIndex, firstFlag = null;
+        for (var key in array) {
+            var keyInt = parseInt(key);
+            if(!firstFlag){
+                minIndex = maxIndex = keyInt;
+                firstFlag = true;
+            }
+            else{
+                if(minIndex > key) minIndex = keyInt;
+                if(maxIndex < key) maxIndex = keyInt;
+            }
+        }
+        var randIndex = this.getRandInteger(minIndex, maxIndex);
+        return  array[randIndex];
     }
 }
