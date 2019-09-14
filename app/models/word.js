@@ -102,4 +102,20 @@ export default {
         return  [...finalList];
     },
 
+    async getWordListBySubjectId(subjectId){
+        var idInt = parseInt(subjectId);
+        var query = await firebase.fs.collection(this.collection)
+                        .where('subject_id',"==", idInt+'')
+                        .orderBy('id', 'desc')
+                        .get();
+
+        var list = [];
+        var docs = query.docs;
+        await docs.forEach(doc =>  {
+            var docItem = doc.data();
+            list.push(docItem);
+        });
+
+        return  [...list];
+    },
 }

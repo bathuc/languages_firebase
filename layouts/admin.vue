@@ -1,35 +1,36 @@
 <template>
-  <div class="admin-wrapper">
-    <Sidebar/>
-    <div class="main-wrapper">
-      <Navbar/>
+    <div class="admin-wrapper">
+        <Sidebar/>
+        <div class="main-wrapper">
+            <Navbar/>
 
-      <nuxt/>
+            <nuxt/>
 
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-	import Sidebar from '@/components/Sidebar';
-	import Navbar from '@/components/Navbar';
+    import Sidebar from '@/components/Sidebar';
+    import Navbar from '@/components/Navbar';
 
-	export default {
-	  middleware: ['authenticated', 'currentRoute'],
-		components: {
-			Sidebar,
-		  Navbar,
-		}
-	}
+    export default {
+        middleware: ['authenticated', 'currentRoute'],
+        components: {
+            Sidebar,
+            Navbar,
+        }
+    }
 
 </script>
 
 <style lang="scss" scoped>
-  .admin-wrapper{
-    display: flex;
-  }
-  .main-wrapper{
-    width: 100%;
-    background: #f4f6f9;
-  }
+    .admin-wrapper {
+        display: flex;
+    }
+
+    .main-wrapper {
+        width: 100%;
+        background: #f4f6f9;
+    }
 </style>

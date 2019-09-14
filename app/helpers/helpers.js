@@ -165,5 +165,54 @@ export default {
         }
 
         return result;
+    },
+
+    getWordSplitInfo(dataArray, page=1,  pagNumber=40) {
+        var firstIndex = (page - 1) * pagNumber;
+        var lastIndex = page * pagNumber - 1;
+
+        var result = {};
+        result.first_index = firstIndex;
+        result.last_index = lastIndex;
+        result.current_page = page;
+
+        // map index & data
+        var itemIndex = [];
+        var data = [];
+        for (var i = firstIndex; i <= lastIndex; i++) {
+            itemIndex.push(i);
+            data[i] = dataArray[i];
+        }
+
+        result.item_index = itemIndex;
+        result.data = data;
+
+        // map select box
+        var selectBox = [];
+        var totalPage = Math.ceil(dataArray.length / pagNumber);
+        for(var i = 1; i<=totalPage; i++) {
+            var first = (i - 1) * pagNumber;
+            var last = i * pagNumber;
+            var boxValue = first + ' - ' + last + ' words';
+            var item ={
+                id: i,
+                value: boxValue
+            };
+            selectBox.push(item);
+        }
+        result.select_box = selectBox;
+
+        return result;
+    },
+
+    getSortRandomArray(array) {
+        var tempArray = [...array];
+        tempArray.sort(function(a, b){return Math.random() - Math.random()});
+        return tempArray;
+    },
+
+    getRandomValues(array) {
+        var rand = array[Math.floor(Math.random() * array.length)];
+        return rand;
     }
 }
