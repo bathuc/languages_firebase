@@ -9,9 +9,37 @@ export default {
         return date.getTime();
     },
 
+    /*
+        dateString: 'yy-mm-dd hh:ii:ss'
+        dateString: '2019-05-18 07:51:46'
+     */
+    convertDateToTimestamp(dateString) {
+        var info = dateString.split(' ');
+
+        var dateInfo = info[0].split('-');
+        var year = parseInt(dateInfo[0]);
+        var month = parseInt(dateInfo[1])-1;
+        var day = parseInt(dateInfo[2]);
+
+        var timeInfo = info[1].split(':');
+        var hour = parseInt(timeInfo[0]);
+        var minute = parseInt(timeInfo[1]);
+        var second = parseInt(timeInfo[2]);
+
+        var dateParse = new Date();
+        dateParse.setFullYear(year);
+        dateParse.setMonth(month);
+        dateParse.setDate(day);
+        dateParse.setHours(hour);
+        dateParse.setMinutes(minute);
+        dateParse.setSeconds(second);
+        return dateParse.getTime();
+    },
+
     formatDate(timestamp) {
+        var timestampInt = parseInt(timestamp);
         var format = 'yyyy-mm-dd hh:ii:ss';
-        var date = new Date(timestamp);
+        var date = new Date(timestampInt);
 
         var year = date.getFullYear();
         if (isNaN(year)) {
@@ -25,8 +53,8 @@ export default {
 
         var hour = date.getHours();
         hour = hour.toString().length == 1 ? '0' + hour : hour.toString();
-        date.setMinutes(date.getMinutes() + 5);
-        date = new Date(date);
+        // date.setMinutes(date.getMinutes() + 5);
+        // date = new Date(date);
         var minute = date.getMinutes();
         minute = minute.toString().length == 1 ? '0' + minute : minute.toString();
         var second = date.getSeconds();
@@ -85,7 +113,7 @@ export default {
     /*
         return a result object
      */
-    getPaginationInfo(dataArray, page = 1, itemPerPage = 12, pagNumber = 8) {
+    getPaginationInfo(dataArray, page = 1, itemPerPage = 20, pagNumber = 8) {
         var result = {
             'back': false,
             'next': false,

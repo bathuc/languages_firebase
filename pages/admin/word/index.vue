@@ -32,6 +32,7 @@
                             <th>Meaning</th>
                             <th>Subject</th>
                             <th>Example</th>
+                            <th>Update at</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,6 +42,7 @@
                             <td >{{ dataItem.meaning }}</td>
                             <td >{{ dataItem.subject_name }}</td>
                             <td >{{ dataItem.example }}</td>
+                            <td >{{ dataItem.updated_at }}</td>
                         </tr>
                     </tbody>
                 </table>

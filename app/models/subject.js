@@ -76,8 +76,9 @@ export default {
     },
 
     async getSubjectNameFromId(id){
+        var idInt = parseInt(id);
         var query = await firebase.fs.collection(this.collection)
-                        .where('id', '==', id)
+                        .where('id', '==', idInt)
                         .get();
 
         var docs = query.docs;

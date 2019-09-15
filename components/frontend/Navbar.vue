@@ -1,28 +1,28 @@
 <template>
     <div class="navigation-bar">
-    <div class="container">
-        <div class="row">
-            <nav class="navbar navbar-expand-sm d-flex justify-content-between">
-                <button class="navbar-toggler" type="button" onclick="menuMobile(this)">
-                    <span class="bar1"></span>
-                    <span class="bar2"></span>
-                    <span class="bar3"></span>
-                </button>
+        <div class="container">
+            <div class="row">
+                <nav class="navbar navbar-expand-sm d-flex justify-content-between">
+                    <button class="navbar-toggler" :class="isClickNavbar? 'change' : ''" type="button" @click="clickNavbar()">
+                        <span class="bar1"></span>
+                        <span class="bar2"></span>
+                        <span class="bar3"></span>
+                    </button>
 
-                <div class="collapse navbar-collapse">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item dropdown">
-                            <a class="nav-link active" href="#">Words</a>
-                        </li>
-                    </ul>
-                </div>
+                    <div class="collapse navbar-collapse" :style="isClickNavbar? 'display:block' : 'display:none'">
+                        <ul class="navbar-nav mr-auto">
+                            <li class="nav-item dropdown">
+                                <a class="nav-link active" href="#">Words</a>
+                            </li>
+                        </ul>
+                    </div>
 
-                <div class="left-bar d-none d-sm-block">
-                </div>
-            </nav>
+                    <div class="left-bar d-none d-sm-block">
+                    </div>
+                </nav>
+            </div>
         </div>
     </div>
-</div>
 </template>
 
 <script>
@@ -34,6 +34,18 @@
             $(".collapse").slideToggle(300);
         });
     });*/
+    export default {
+        data(){
+            return {
+                isClickNavbar: false,
+            }
+        },
+        methods: {
+            clickNavbar(){
+                this.isClickNavbar = ! this.isClickNavbar;
+            }
+        }
+    }
 </script>
 
 <style>

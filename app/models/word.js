@@ -82,6 +82,7 @@ export default {
 
     async getWordList(){
         var query = await firebase.fs.collection(this.collection)
+                            .orderBy('updated_at', 'desc')
                             .orderBy('id', 'desc')
                             .get();
 
@@ -95,6 +96,7 @@ export default {
         const promises = list.map(async listItem => {
             var item = listItem;
             item.subject_name = await subject.getSubjectNameFromId(listItem.subject_id);
+            item.updated_at = helpers.formatDate(item.updated_at);
             return item;
         });
 
@@ -106,6 +108,7 @@ export default {
         var idInt = parseInt(subjectId);
         var query = await firebase.fs.collection(this.collection)
                         .where('subject_id',"==", idInt+'')
+                        .orderBy('updated_at', 'desc')
                         .orderBy('id', 'desc')
                         .get();
 
