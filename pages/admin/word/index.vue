@@ -32,7 +32,6 @@
                             <th>Meaning</th>
                             <th>Subject</th>
                             <th>Example</th>
-                            <th>Update at</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -41,8 +40,7 @@
                             <td >{{ dataItem.word }}</td>
                             <td >{{ dataItem.meaning }}</td>
                             <td >{{ dataItem.subject_name }}</td>
-                            <td >{{ dataItem.example }}</td>
-                            <td >{{ dataItem.updated_at }}</td>
+                            <td class="word-example">{{ dataItem.example }}</td>
                         </tr>
                     </tbody>
                 </table>
@@ -110,5 +108,7 @@
 
 
 <style lang="scss" scoped>
-
+    .word-example{
+        max-width: 500px;
+    }
 </style>

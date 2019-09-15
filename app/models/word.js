@@ -107,7 +107,7 @@ export default {
     async getWordListBySubjectId(subjectId){
         var idInt = parseInt(subjectId);
         var query = await firebase.fs.collection(this.collection)
-                        .where('subject_id',"==", idInt+'')
+                        .where('subject_id',"==", idInt)
                         .orderBy('updated_at', 'desc')
                         .orderBy('id', 'desc')
                         .get();

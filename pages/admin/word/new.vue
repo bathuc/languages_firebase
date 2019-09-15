@@ -83,7 +83,6 @@
                 subjectMessage: '',
                 wordMessage: '',
                 meaningMessage: '',
-                subjectId: '',
                 wordValue: '',
                 meaning: '',
                 subjectOption: [],
