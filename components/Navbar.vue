@@ -1,11 +1,11 @@
 <template>
     <div class="navbar-wraper">
         <div class="nav-start">
-            <i class="material-icons">menu</i>
+            <i class="material-icons hamburger-menu" @click="hambugerMenuClick">menu</i>
         </div>
         <div class="nav-end">
             <span>Admin</span>
-            <a class="btn btn-light" @click="doLogout">Logout</a>
+            <a class="btn btn-light btn-logout" @click="doLogout">Logout</a>
         </div>
         <Loading :showLoading="this.showLoading"/>
     </div>
@@ -24,6 +24,10 @@
                 showLoading: false,
             }
         },
+        created(){
+            // reset to false
+            this.$store.commit('utility/setHambugerClick', false)
+        },
         methods: {
             async doLogout() {
                 this.showLoading = true;
@@ -34,6 +38,10 @@
                 }
                 this.$store.commit('removeUser');
                 this.$router.push('/admin/login');
+            },
+            hambugerMenuClick(){
+                var click = this.$store.state.utility.hambugerClick;
+                this.$store.commit('utility/setHambugerClick', !click)
             }
         }
     }
@@ -56,6 +64,16 @@
 
         * {
             margin-left: 20px;
+        }
+    }
+
+    .btn-logout{
+        cursor: pointer;
+    }
+
+    @media (min-width: 768px) {
+        .hamburger-menu{
+            display: none;
         }
     }
 </style>

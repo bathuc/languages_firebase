@@ -25,7 +25,8 @@ export default {
   */
   css: [
     { src: 'material-design-icons-iconfont/dist/material-design-icons.css', lang: 'css' },
-    '@/assets/css/style.scss',
+    '@/assets/css/admin.scss',
+    '@/assets/css/frontend.scss',
   ],
   /*
   ** Plugins to load before mounting the App

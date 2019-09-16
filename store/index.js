@@ -2,6 +2,7 @@ import Vuex from 'vuex'
 import createPersistedState from 'vuex-persistedstate'
 
 import currentRoute from './currentRoute';
+import utility from './utility';
 
 const createStore = () => {
     return new Vuex.Store({
@@ -38,7 +39,8 @@ const createStore = () => {
               })*/
         ],
         modules: {
-          currentRoute: currentRoute
+          currentRoute: currentRoute,
+            utility: utility,
         }
     })
 }

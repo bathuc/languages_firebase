@@ -187,53 +187,6 @@
 </script>
 
 <style lang="scss" scoped>
-    .menu-control {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin: 20px 0px;
-    }
-    .control-item {
-
-    }
-
-    .time-control{
-        display: flex;
-        align-items: center;
-        * {
-            margin-left: 10px;
-        }
-    }
-
-    #time {
-        width: 50px;
-    }
-
-    #hira_show {
-        cursor: pointer;
-        background-color: rgb(255, 255, 255);
-        color: rgb(102, 102, 102);
-        font-size: 350%;
-    }
-
-    .word-content{
-        font-size: 21px;
-        min-height: 220px;
-        .meaning{
-            font-size: 25px;
-        }
-        p{
-            padding: 5px 0px;
-            margin: 0px;
-        }
-    }
-
-    .table-word-item {
-        color: #007bff;
-        font-size: 18px;
-        cursor: pointer;
-    }
-
 
 </style>
 

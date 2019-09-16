@@ -80,6 +80,18 @@ export default {
         await firebase.fs.collection(this.collection).add(inputs);
     },
 
+    async findWord(word) {
+        var query = await firebase.fs.collection(this.collection)
+                            .where('word','==', word)
+                            .get();
+        var docs = query.docs;
+        if (!helpers.isEmptyObject(docs)) {
+            return docs[0].data();
+        } else {
+            return '';
+        }
+    },
+
     async getWordList(){
         var query = await firebase.fs.collection(this.collection)
                             .orderBy('updated_at', 'desc')

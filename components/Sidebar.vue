@@ -1,6 +1,6 @@
 <template>
-    <div class="sidebar-wraper">
-        <div class="app-title">
+    <div class="sidebar-wraper" :class="hambugerClick? 'toggle' : ''">
+        <div class="app-title" @click="languageClick">
             Languages
         </div>
         <div class="account-picture" @click="dashboardClick">
@@ -20,31 +20,57 @@
             return {}
         },
         created() {
+            console.log('hambegerClick',this.hambegerClick);
         },
         computed: {
             currentRoute() {
                 return this.$store.state.currentRoute.route;
             },
+            hambugerClick(){
+                return this.$store.state.utility.hambugerClick;
+            }
         },
         methods: {
             wordClick() {
+                this.$store.commit('utility/setHambugerClick', false)
                 this.$router.push('/admin/word');
             },
             subjectClick() {
+                this.$store.commit('utility/setHambugerClick', false)
                 this.$router.push('/admin/subject');
             },
             dashboardClick() {
+                this.$store.commit('utility/setHambugerClick', false)
                 this.$router.push('/admin/dashboard');
+            },
+            languageClick() {
+                this.$router.push('/');
             }
         }
     }
 </script>
 <style lang="scss" scoped>
+
     .sidebar-wraper {
-        width: 250px;
+        width: 15rem;
         height: 100vh;
         background-color: #343a40;
         color: #c2c7d0;
+        margin-left: -15rem;
+    }
+
+    .sidebar-wraper.toggle {
+        margin-left: 0rem;
+    }
+
+    @media (min-width: 768px) {
+        .sidebar-wraper {
+            margin-left: 0;
+        }
+
+        .sidebar-wraper.toggle {
+            margin-left: -15rem;
+        }
     }
 
     .app-title {
@@ -55,6 +81,7 @@
         display: flex;
         align-items: center;
         padding-left: 20px;
+        cursor:pointer;
     }
 
     .account-picture {

@@ -2,11 +2,13 @@
     <div class="content-wrapper">
         <div class="content-header">
             <h4>Words</h4>
-            <div class="form-search-wrapper">
-                <span>Find Word</span>
-                <input type="text" class="form-control">
-                <button type="button" class="btn btn-blue">Find</button>
-            </div>
+            <form v-on:submit.prevent="findWord">
+                <div class="form-search-wrapper">
+                    <span class="d-none d-lg-block">Find Word</span>
+                    <input v-model="wordValue" type="text" class="form-control">
+                    <button type="button" class="btn btn-blue" @click="findWord">Find</button>
+                </div>
+            </form>
         </div>
 
         <div class="content-meta">
@@ -15,7 +17,7 @@
 
         <div class="box">
             <div class="box-title">
-                <span>Word Infomation</span>
+                <span class="d-none d-lg-block">Word Infomation</span>
                 <ul class="pagination" v-if="paginationInfo.is_pagination">
                     <li :class="paginationInfo.back? '': 'disabled' " class="page-item "><span class="page-link" @click="clickBack">Previous</span></li>
                     <li v-for="index in paginationInfo.item_index" :class="index==paginationInfo.current_page? 'active' : ''" class="page-item "><span class="page-link" @click="pageClick(index)">{{ index}}</span></li>
@@ -31,7 +33,7 @@
                             <th>Word</th>
                             <th>Meaning</th>
                             <th>Subject</th>
-                            <th>Example</th>
+                            <th class="d-none d-lg-block">Example</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,7 +42,7 @@
                             <td >{{ dataItem.word }}</td>
                             <td >{{ dataItem.meaning }}</td>
                             <td >{{ dataItem.subject_name }}</td>
-                            <td class="word-example">{{ dataItem.example }}</td>
+                            <td class="d-none d-lg-block"> <span class="word-example">{{ dataItem.example }}</span></td>
                         </tr>
                     </tbody>
                 </table>
@@ -63,6 +65,7 @@
                 page: 1,
                 paginationInfo: [],
                 wordList: [],
+                wordValue: '',
             }
         },
         async created(){
@@ -101,6 +104,17 @@
             clickEditWord(id){
                 console.log('id',id);
                 this.$router.push('/admin/word/edit/'+id);
+            },
+            async findWord(){
+                if(!this.wordValue){
+                    this.wordList = await word.getWordList();
+                    this.paginationInfo = await helpers.getPaginationInfo(this.wordList, this.page);
+                }
+                else{
+                    var wordItem = await word.findWord(this.wordValue);
+                    this.wordList = [wordItem];
+                    this.paginationInfo = await helpers.getPaginationInfo(this.wordList, 1);
+                }
             }
         }
     }
@@ -108,7 +122,5 @@
 
 
 <style lang="scss" scoped>
-    .word-example{
-        max-width: 500px;
-    }
+
 </style>
