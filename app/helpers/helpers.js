@@ -113,7 +113,7 @@ export default {
     /*
         return a result object
      */
-    getPaginationInfo(dataArray, page = 1, itemPerPage = 20, pagNumber = 8) {
+    getPaginationInfo(dataArray, page = 1, itemPerPage = 20, pagNumber = 5) {
         var result = {
             'back': false,
             'next': false,
