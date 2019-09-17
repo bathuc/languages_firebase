@@ -136,32 +136,32 @@
                 console.log('this.meaning', this.meaning);
                 console.log('this.subjectId', this.subjectId);
 
-                if (this.subjectId && this.wordValue && this.meaning && !isExitWord) {
+                if(this.wordValue === this.originalWordValue){
+                    // same word
+                    var id = this.wordId;
+                    var inputs = {
+                        meaning: this.meaning,
+                        subject_id: this.subjectId,
+                        updated_at: Date.now(),
+                    }
+
+                    await word.updateFieldsById(id, inputs);
+                    this.showLoading = false;
+                    let toast = this.$toasted.show('Update Word successfully.', {
+                        theme: "toasted-primary",
+                        type: "success",
+                        icon: "delete",
+                        position: "top-center",
+                        duration: 4000
+                    });
+                }
+                else if (this.subjectId && this.wordValue && this.meaning && !isExitWord) {
 
                     var url = 'https://mylanguagesapi.herokuapp.com/word/' + this.wordValue;
                     var wordObject = await this.$axios.$get(url);
                     if (!wordObject.sound) {
                         this.wordMessage = 'Word not found. Please try other word';
-                    } else if(this.wordValue === this.originalWordValue) {
-                        // same word
-                        var id = this.wordId;
-                        var inputs = {
-                            meaning: this.meaning,
-                            subject_id: this.subjectId,
-                            updated_at: Date.now(),
-                        }
-
-                        await word.updateFieldsById(id, inputs);
-                        this.showLoading = false;
-                        let toast = this.$toasted.show('Update Word successfully.', {
-                            theme: "toasted-primary",
-                            type: "success",
-                            icon: "delete",
-                            position: "top-center",
-                            duration: 4000
-                        });
                     } else {
-
                         var id = this.wordId;
                         var inputs = {
                             word: this.wordValue,
