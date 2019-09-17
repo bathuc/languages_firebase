@@ -27,6 +27,7 @@
 <style lang="scss" scoped>
     .admin-wrapper {
         display: flex;
+        background-color: #343a40;
     }
 
     .main-wrapper {
