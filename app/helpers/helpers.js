@@ -251,8 +251,16 @@ export default {
         return result;
     },
 
+    cloneArray(array){
+        var result = [];
+        array.forEach(item=>{
+            result.push(item);
+        });
+        return result;
+    },
+
     getRandomArray(array) {
-        var tempArray = [...array];
+        var tempArray = this.cloneArray(array);
         tempArray.sort(function(a, b){return Math.random() - Math.random()});
         return tempArray;
     },
