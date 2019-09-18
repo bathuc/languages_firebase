@@ -11,21 +11,14 @@
                 <label for="radio_2">40 - 80 words</label>
             </div>
 
-            <div class="control-item d-none d-lg-block">
+            <!--<div class="control-item d-none d-lg-block">
                 <input v-model="wordNumber" type="radio" name="wordNumber" id="radio_3" value="3"/>
                 <label for="radio_3">80 - 120 words</label>
-            </div>
+            </div>-->
 
             <div class="control-item d-none d-lg-block">
                 <input v-model="wordNumber" type="radio" name="wordNumber" id="radio_4" value="random"/>
                 <label for="radio_4">Random</label>
-            </div>
-
-            <div class="control-item  d-none d-lg-block">
-                <div class="time-control">
-                    <label for="time">Time</label>
-                    <input v-model="time" type="text" name="time" id="time" class="form-control"/>
-                </div>
             </div>
 
             <div class="control-item">
@@ -40,6 +33,23 @@
                 </select>
             </div>
 
+            <div class="control-item  d-none d-lg-block">
+                <div class="time-control">
+                    <label for="time">Time</label>
+                    <input v-model="time" type="text" name="time" id="time" class="form-control"/>
+                </div>
+            </div>
+
+            <div class="control-item">
+                <div class="time-control">
+                    <span>Sound</span>
+                    <label class="switch">
+                        <input v-model="soundFlag" type="checkbox">
+                        <span class="slider round"></span>
+                    </label>
+                </div>
+            </div>
+
             <div class="control-item">
                 <button type="button" class="btn btn-success" @click="playClick">Play</button>
             </div>
@@ -47,7 +57,7 @@
 
         <div class="content-wrapper row">
             <div class="col-12 col-lg-6" v-if="wordItemRender">
-                <span id="hira_show" @click="soundClick">{{  wordItemRender.word }}</span>
+                <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
                 <div class="word-content">
                     <p class="ipa"> {{ wordItemRender.ipa}}</p>
                     <p class="meaning text-success"> {{ wordItemRender.meaning}}</p>
@@ -86,6 +96,7 @@
                 wordList: [],
                 wordItemRender: '',
                 time: 4,
+                soundFlag: true,
                 paginationInfo: [],
                 subjectId: 1,
                 subjectOption: [],
@@ -110,9 +121,9 @@
             });
 
             window.addEventListener('keydown', function(event) {
-                // right down, click next word
+                // right down, play sound
                 if (event.keyCode === 40) {
-                    me.soundClick();
+                    me.soundPlay();
                 }
             });
         },
@@ -152,6 +163,13 @@
                 await this.soundClick();
             },
             async soundClick(){
+                if(this.soundFlag) {
+                    var soundPath = this.wordItemRender.sound;
+                    var sound = new Audio(soundPath);
+                    await sound.play();
+                }
+            },
+            async soundPlay(){
                 var soundPath = this.wordItemRender.sound;
                 var sound = new Audio(soundPath);
                 await sound.play();
@@ -176,8 +194,10 @@
                 arrayWord.forEach(function(word){
                     setTimeout(function (word){
                         me.wordItemRender = word;
-                        var audio = new Audio(word.sound);
-                        audio.play();
+                        if(me.soundFlag) {
+                            var audio = new Audio(word.sound);
+                            audio.play();
+                        }
                     }, soundTime, word);
                     soundTime += time * 1000;
                 });
