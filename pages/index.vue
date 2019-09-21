@@ -89,6 +89,11 @@
 
     export default {
         layout: 'frontend',
+        head () {
+            return {
+                title: 'languages',
+            }
+        },
         data() {
             return {
                 wordNumber: 1,
