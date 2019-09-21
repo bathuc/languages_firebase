@@ -19,7 +19,12 @@
         components: {
             Sidebar,
             Navbar,
-        }
+        },
+        head () {
+            return {
+                title: 'languages admin',
+            }
+        },
     }
 
 </script>

@@ -55,6 +55,11 @@
         components: {
             Loading,
         },
+        head () {
+            return {
+                title: 'languages admin',
+            }
+        },
         data() {
             return {
                 email: '',
