@@ -140,6 +140,7 @@
                             word: this.wordValue,
                             meaning: this.meaning,
                             ipa: wordObject.ipa,
+                            definition: wordObject.definition,
                             sound: wordObject.sound,
                             example: wordObject.example,
                             example1: wordObject.example1,

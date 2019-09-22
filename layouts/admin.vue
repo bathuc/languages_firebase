@@ -11,8 +11,8 @@
 </template>
 
 <script>
-    import Sidebar from '@/components/Sidebar';
-    import Navbar from '@/components/Navbar';
+    import Sidebar from '@/components/admin/Sidebar';
+    import Navbar from '@/components/admin/Navbar';
 
     export default {
         middleware: ['authenticated', 'currentRoute'],

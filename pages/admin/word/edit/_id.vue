@@ -168,6 +168,7 @@
                             meaning: this.meaning,
                             ipa: wordObject.ipa,
                             sound: wordObject.sound,
+                            definition: wordObject.definition,
                             example: wordObject.example,
                             example1: wordObject.example1,
                             subject_id: this.subjectId,

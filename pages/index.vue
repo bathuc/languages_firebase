@@ -56,18 +56,19 @@
         </div>
 
         <div class="content-wrapper row">
-            <div class="col-12 col-lg-6" v-if="wordItemRender">
+            <div class="col-12 col-lg-7" v-if="wordItemRender">
                 <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
                 <div class="word-content">
                     <p class="ipa"> {{ wordItemRender.ipa}}</p>
                     <p class="meaning text-success"> {{ wordItemRender.meaning}}</p>
-                    <p class="example"> {{ wordItemRender.example }} </p>
-                    <p> {{ wordItemRender.example1 }} </p>
+                    <p class="definition"> {{ wordItemRender.definition }} </p>
+                    <p class="example" @click="toggleExample"> {{ example }} </p>
+                    <p class="d-none d-lg-block"> {{ wordItemRender.example1 }} </p>
                 </div>
                 <button type="button" class="btn btn-lg btn-primary" @click="nextWord">Next Word</button>
             </div>
 
-            <div class="d-none d-lg-block col-lg-6" v-if="wordTable.tableRender">
+            <div class="table-render d-none d-lg-block col-lg-5" v-if="wordTable.tableRender">
                 <table class="table table-bordered info-table" cellpadding="0" cellspacing="0">
                     <tbody>
                         <tr v-for="rowItem in wordTable.tableRender">
@@ -100,6 +101,7 @@
                 wordTable: [],
                 wordList: [],
                 wordItemRender: '',
+                example: '',
                 time: 4,
                 soundFlag: true,
                 paginationInfo: [],
@@ -154,9 +156,20 @@
                 this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
                 this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
                 this.soundClick();
+            },
+            wordItemRender: function (newValue) {
+                this.example = this.wordItemRender.example;
             }
         },
         methods: {
+            toggleExample(){
+                if(this.example == this.wordItemRender.example){
+                    this.example = this.wordItemRender.example1;
+                }
+                else{
+                    this.example = this.wordItemRender.example;
+                }
+            },
             async nextWord(){
                 this.wordItemRender = helpers.getRandomValues(this.wordTable.data);
                 // console.log('this.wordTable.data', this.wordTable.data);

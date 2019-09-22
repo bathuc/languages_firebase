@@ -1,5 +1,5 @@
 <template>
-    <div class="navigation-bar">
+    <div class="navigation-bar d-none d-md-block">
         <div class="container">
             <div class="row">
                 <nav class="navbar navbar-expand-sm d-flex justify-content-between">

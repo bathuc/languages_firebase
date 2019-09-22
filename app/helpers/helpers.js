@@ -217,7 +217,7 @@ export default {
                     word_item: dataArray[i]
                 };
                 temp.push(objectItem);
-                if(temp.length === 5){
+                if(temp.length === 3){
                     tableRender.push(temp);
                     temp = [];
                 }
