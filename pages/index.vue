@@ -62,8 +62,8 @@
                     <p class="ipa"> {{ wordItemRender.ipa}}</p>
                     <p class="meaning text-success"> {{ wordItemRender.meaning}}</p>
                     <p class="definition"> {{ wordItemRender.definition }} </p>
-                    <p class="example" @click="toggleExample"> {{ example }} </p>
-                    <p class="d-none d-lg-block"> {{ wordItemRender.example1 }} </p>
+                    <p class="example"> {{ wordItemRender.example }} </p>
+                    <p class=""> {{ wordItemRender.example1 }} </p>
                 </div>
                 <button type="button" class="btn btn-lg btn-primary" @click="nextWord">Next Word</button>
             </div>
@@ -101,7 +101,6 @@
                 wordTable: [],
                 wordList: [],
                 wordItemRender: '',
-                example: '',
                 time: 4,
                 soundFlag: true,
                 paginationInfo: [],
@@ -156,20 +155,9 @@
                 this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
                 this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
                 this.soundClick();
-            },
-            wordItemRender: function (newValue) {
-                this.example = this.wordItemRender.example;
             }
         },
         methods: {
-            toggleExample(){
-                if(this.example == this.wordItemRender.example){
-                    this.example = this.wordItemRender.example1;
-                }
-                else{
-                    this.example = this.wordItemRender.example;
-                }
-            },
             async nextWord(){
                 this.wordItemRender = helpers.getRandomValues(this.wordTable.data);
                 // console.log('this.wordTable.data', this.wordTable.data);
