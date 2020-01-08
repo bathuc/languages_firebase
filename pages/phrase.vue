@@ -32,7 +32,7 @@
                     <p class="example"> {{ phraseItemRender.example }} </p>
                     <p class=""> {{ phraseItemRender.example1 }} </p>
                 </div>
-                <button type="button" class="btn btn-lg btn-primary" @click="nextWord">Next Phrase</button>
+                <button type="button" class="btn btn-lg btn-primary" @click="nextPhrase">Next Phrase</button>
             </div>
 
             <div class="d-none d-lg-block col-lg-5" v-if="phraseTable.tableRender">
@@ -76,22 +76,13 @@
             this.phraseList = await phrase.getPhraseList();
             this.phraseTable = helpers.getPhraseSplitInfo(this.phraseList, this.phraseNumber);
             this.phraseItemRender = this.phraseTable.data[0];
-            console.log('phraseList', this.phraseList);
-            console.log('phraseTable', this.phraseTable);
         },
         mounted() {
             var me = this;
             window.addEventListener('keydown', function(event) {
                 // right arrow, click next word
                 if (event.keyCode === 39) {
-                    me.nextWord();
-                }
-            });
-
-            window.addEventListener('keydown', function(event) {
-                // right down, play sound
-                if (event.keyCode === 40) {
-                    me.soundPlay();
+                    me.nextPhrase();
                 }
             });
         },
@@ -111,7 +102,7 @@
             },
         },
         methods: {
-            async nextWord(){
+            async nextPhrase(){
                 this.phraseItemRender = helpers.getRandomValues(this.phraseTable.data);
             },
             async clickItem(index){
