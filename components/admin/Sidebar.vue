@@ -11,6 +11,7 @@
         <ul class="sidebar-menu">
             <li :class="currentRoute.includes('/admin/subject')? 'active':''" @click="subjectClick">Subjects</li>
             <li :class="currentRoute.includes('/admin/word')? 'active':'' " @click="wordClick">Words</li>
+            <li :class="currentRoute.includes('/admin/phrase')? 'active':'' " @click="phraseClick">Phrases</li>
         </ul>
     </div>
 </template>
@@ -31,6 +32,10 @@
             }
         },
         methods: {
+            phraseClick() {
+                this.$store.commit('utility/setHambugerClick', false)
+                this.$router.push('/admin/phrase');
+            },
             wordClick() {
                 this.$store.commit('utility/setHambugerClick', false)
                 this.$router.push('/admin/word');

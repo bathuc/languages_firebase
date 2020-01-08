@@ -92,7 +92,7 @@
         layout: 'frontend',
         head () {
             return {
-                title: 'languages',
+                title: 'words',
             }
         },
         data() {

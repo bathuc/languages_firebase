@@ -250,6 +250,62 @@ export default {
 
         return result;
     },
+    
+    getPhraseSplitInfo(dataArray, page=1,  pagNumber=16) {
+        var firstIndex = (page - 1) * pagNumber;
+        var lastIndex = page * pagNumber - 1;
+        
+        var result = {};
+        result.first_index = firstIndex;
+        result.last_index = lastIndex;
+        result.current_page = page;
+        
+        // map index & data
+        var itemIndex = [];
+        var data = []; var tableRender = [];
+        var j = 1; var temp = [];
+        for (var i = firstIndex; i <= lastIndex; i++) {
+            if(dataArray[i]){
+                itemIndex.push(i);
+                data[i] = dataArray[i];
+                var objectItem = {
+                    index: i,
+                    phrase_item: dataArray[i]
+                };
+                temp.push(objectItem);
+                if(temp.length === 2){
+                    tableRender.push(temp);
+                    temp = [];
+                }
+            }
+        }
+        
+        if(temp.length > 0){
+            tableRender.push(temp);
+            temp = [];
+        }
+        
+        result.item_index = itemIndex;
+        result.data = data;
+        result.tableRender = tableRender;
+        
+        // map select box
+        var selectBox = [];
+        var totalPage = Math.ceil(dataArray.length / pagNumber);
+        for(var i = 1; i<=totalPage; i++) {
+            var first = (i - 1) * pagNumber;
+            var last = i * pagNumber;
+            var boxValue = first + ' - ' + last + ' phrases';
+            var item ={
+                id: i,
+                value: boxValue
+            };
+            selectBox.push(item);
+        }
+        result.select_box = selectBox;
+        
+        return result;
+    },
 
     cloneArray(array){
         var result = [];

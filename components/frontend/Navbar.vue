@@ -12,7 +12,8 @@
                     <div class="collapse navbar-collapse" :style="isClickNavbar? 'display:block' : 'display:none'">
                         <ul class="navbar-nav mr-auto">
                             <li class="nav-item dropdown">
-                                <a class="nav-link active" href="#">Words</a>
+                                <a :class="['nav-link', (this.currentRoute === '' || this.currentRoute === '/')? 'active':'', ]" @click="wordClick" href="javascript:void(0);">Words</a>
+                                <a :class="['nav-link', currentRoute.includes('phrase')? 'active':'']" @click="phraseClick" href="javascript:void(0);">Phrases</a>
                             </li>
                         </ul>
                     </div>
@@ -40,10 +41,21 @@
                 isClickNavbar: false,
             }
         },
+        computed: {
+            currentRoute() {
+                return this.$store.state.currentRoute.route;
+            },
+        },
         methods: {
             clickNavbar(){
                 this.isClickNavbar = ! this.isClickNavbar;
-            }
+            },
+            wordClick(){
+                this.$router.push('/');
+            },
+            phraseClick(){
+                this.$router.push('/phrase');
+            },
         }
     }
 </script>

@@ -20,6 +20,7 @@
     import Navbar from '@/components/frontend/Navbar';
 
     export default {
+        middleware: ['currentRoute'],
         head: {
             bodyAttrs: {
                 class: 'front-body'
