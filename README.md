@@ -1,4 +1,4 @@
-# languages_firebase
+    # languages_firebase
 
 > My laudable Nuxt.js project
 
@@ -16,7 +16,11 @@ $ yarn build
 $ yarn start
 
 # generate static project
-$ yarn generate
+$ nuxt generate
+
+#for deploy
+firebase deploy
+
 ```
 
 For detailed explanation on how things work, check out [Nuxt.js docs](https://nuxtjs.org).
