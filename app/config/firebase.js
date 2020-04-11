@@ -15,12 +15,13 @@ if (!firebase.apps.length) {
 
 
 // firebase utils
-const fs = firebase.firestore()
-const db = firebase.database()
-const auth = firebase.auth()
-
+const fs = firebase.firestore();
+const db = firebase.database();
+const auth = firebase.auth();
+const storage = firebase.storage();
 export {
     fs,
     db,
-    auth
+    auth,
+    storage
 }

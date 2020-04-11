@@ -67,6 +67,7 @@
     import word from '@/app/models/word';
     import helpers from "@/app/helpers/helpers";
     import Loading from '@/components/Loading';
+    const firebase = require('@/app/config/firebase');
 
     import Vue from 'vue';
     import Toasted from 'vue-toasted';
@@ -156,7 +157,7 @@
                     });
                 }
                 else if (this.subjectId && this.wordValue && this.meaning && !isExitWord) {
-
+                    // another word
                     var url = 'https://mylanguagesapi.herokuapp.com/word/' + this.wordValue;
                     var wordObject = await this.$axios.$get(url);
                     if (!wordObject.sound) {
@@ -176,6 +177,29 @@
                         }
 
                         await word.updateFieldsById(id, inputs);
+
+	                    var wordName = this.wordValue;
+
+	                    if (wordObject.audio){
+		                    // upload audio to firestore
+		                    var url = url = 'http://mylanguagesapi.herokuapp.com/download/' + wordName;
+		                    let blob = await fetch(url).then(r => r.blob());
+		                    await firebase.storage.ref().child('audio/' + wordName +'.mp3').put(blob);
+
+		                    // get firebase audio url and update it to db
+		                    var url = await firebase.storage.ref().child('audio/'+wordName+'.mp3').getDownloadURL();
+
+		                    var inputs = {
+			                    audio: url,
+		                    }
+
+		                    await word.updateFieldsById(id, inputs);
+
+		                    // delete file on heroku
+		                    var deleteUrl = 'http://mylanguagesapi.herokuapp.com/delete/' + wordName;
+		                    await this.$axios.$get(deleteUrl);
+	                    }
+
                         this.showLoading = false;
                         let toast = this.$toasted.show('Update Word successfully.', {
                             theme: "toasted-primary",

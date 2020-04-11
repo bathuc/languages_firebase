@@ -79,7 +79,15 @@ export default {
     async insert(inputs) {
         await firebase.fs.collection(this.collection).add(inputs);
     },
-
+    
+    async deleteWord(word) {
+        var query = await firebase.fs.collection(this.collection)
+                            .where('word','==', word)
+                            .get();
+        query.docs.forEach(function(doc) {
+            doc.ref.delete();
+        });
+    },
     async findWord(word) {
         var query = await firebase.fs.collection(this.collection)
                             .where('word','==', word)

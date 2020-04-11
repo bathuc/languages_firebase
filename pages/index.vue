@@ -11,11 +11,6 @@
                 <label for="radio_2">40 - 80 words</label>
             </div>
 
-            <!--<div class="control-item d-none d-lg-block">
-                <input v-model="wordNumber" type="radio" name="wordNumber" id="radio_3" value="3"/>
-                <label for="radio_3">80 - 120 words</label>
-            </div>-->
-
             <div class="control-item d-none d-lg-block">
                 <input v-model="wordNumber" type="radio" name="wordNumber" id="radio_4" value="random"/>
                 <label for="radio_4">Random</label>
@@ -59,7 +54,17 @@
             <div class="col-12 col-lg-7" v-if="wordItemRender">
                 <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
                 <div class="word-content">
-                    <p class="ipa"> {{ wordItemRender.ipa}}</p>
+                    <div class="d-flex align-items-center">
+                        <p class="ipa pr-4"> {{ wordItemRender.ipa}}</p>
+                        <span class="audio-play" @click="audioPlay"> audio
+                            <svg class="bi bi-volume-up-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M11.536 14.01A8.473 8.473 0 0014.026 8a8.473 8.473 0 00-2.49-6.01l-.708.707A7.476 7.476 0 0113.025 8c0 2.071-.84 3.946-2.197 5.303l.708.707z"/>
+                              <path d="M10.121 12.596A6.48 6.48 0 0012.025 8a6.48 6.48 0 00-1.904-4.596l-.707.707A5.483 5.483 0 0111.025 8a5.483 5.483 0 01-1.61 3.89l.706.706z"/>
+                              <path d="M8.707 11.182A4.486 4.486 0 0010.025 8a4.486 4.486 0 00-1.318-3.182L8 5.525A3.489 3.489 0 019.025 8 3.49 3.49 0 018 10.475l.707.707z"/>
+                              <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06z" clip-rule="evenodd"/>
+                            </svg>
+                        </span>
+                    </div>
                     <p class="meaning text-success"> {{ wordItemRender.meaning}}</p>
                     <p class="definition"> {{ wordItemRender.definition }} </p>
                     <p class="example"> {{ wordItemRender.example }} </p>
@@ -180,6 +185,11 @@
                 var sound = new Audio(soundPath);
                 await sound.play();
             },
+	        async audioPlay(){
+		        var audioPath = this.wordItemRender.audio;
+		        var sound = new Audio(audioPath);
+		        await sound.play();
+            },
             playClick(){
                 var number = parseInt(this.wordNumber);
                 var isInt = Number.isInteger(number);
@@ -213,6 +223,9 @@
 </script>
 
 <style lang="scss" scoped>
-
+    .audio-play{
+        font-size: 18px;
+        cursor: pointer;
+    }
 </style>
 
