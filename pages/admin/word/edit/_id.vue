@@ -182,7 +182,7 @@
 
 	                    if (wordObject.audio){
 		                    // upload audio to firestore
-		                    var url = url = 'http://mylanguagesapi.herokuapp.com/download/' + wordName;
+		                    var url = url = 'https://mylanguagesapi.herokuapp.com/download/' + wordName;
 		                    let blob = await fetch(url).then(r => r.blob());
 		                    await firebase.storage.ref().child('audio/' + wordName +'.mp3').put(blob);
 
@@ -196,7 +196,7 @@
 		                    await word.updateFieldsById(id, inputs);
 
 		                    // delete file on heroku
-		                    var deleteUrl = 'http://mylanguagesapi.herokuapp.com/delete/' + wordName;
+		                    var deleteUrl = 'https://mylanguagesapi.herokuapp.com/delete/' + wordName;
 		                    await this.$axios.$get(deleteUrl);
 	                    }
 
