@@ -125,18 +125,25 @@
         mounted() {
             var me = this;
             window.addEventListener('keydown', function(event) {
-                // right arrow, click next word
                 if (event.keyCode === 39) {
                     me.nextWord();
                 }
             });
 
             window.addEventListener('keydown', function(event) {
-                // right down, play sound
+                //  down arrow, play sound
                 if (event.keyCode === 40) {
-                    me.soundPlay();
+                    me.audioPlay();
                 }
             });
+
+	        window.addEventListener('keydown', function(event) {
+		        // up arrow, play sound
+		        if (event.keyCode === 38) {
+			        console.log('sound  play');
+			        me.soundPlay();
+		        }
+	        });
         },
         watch:{
              wordNumber: function(newValue){
