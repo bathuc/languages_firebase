@@ -107,7 +107,7 @@
                 wordList: [],
                 wordItemRender: '',
                 time: 4,
-                soundFlag: true,
+                soundFlag: false,
                 paginationInfo: [],
                 subjectId: 1,
                 subjectOption: [],

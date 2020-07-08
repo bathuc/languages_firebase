@@ -49,7 +49,7 @@
                 this.$router.push('/admin/dashboard');
             },
             languageClick() {
-                this.$router.push('/');
+                this.$router.push('/admin/dashboard');
             }
         }
     }
