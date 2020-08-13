@@ -105,6 +105,7 @@
                 wordNumber: 1,
                 wordTable: [],
                 wordList: [],
+                wordCurrentList: [],
                 wordItemRender: '',
                 time: 4,
                 soundFlag: false,
@@ -171,9 +172,12 @@
         },
         methods: {
             async nextWord(){
-                this.wordItemRender = helpers.getRandomValues(this.wordTable.data);
-                // console.log('this.wordTable.data', this.wordTable.data);
-                // console.log('wordItemRender', this.wordItemRender);
+                if(helpers.isEmptyObject(this.wordCurrentList)){
+                    this.wordCurrentList = this.wordTable.data;
+                }
+                this.wordItemRender = helpers.getRandomValues(this.wordCurrentList);
+                // remove current word from list
+                this.wordCurrentList = this.wordCurrentList.filter(item => !(item.id === this.wordItemRender.id));
                 await this.soundClick();
             },
             async clickItem(index){
