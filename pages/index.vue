@@ -52,7 +52,13 @@
 
         <div class="content-wrapper row">
             <div class="col-12 col-lg-7" v-if="wordItemRender">
-                <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
+                <div class="d-flex justify-content-between">
+                    <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
+                    <div>
+                        <p class="btn btn-primary ml-2 px-2 py-1 h5 font-weight-bold">{{ wordIndex }} / {{ wordTotal }}</p>
+                        <p class="btn btn-success ml-2 px-2 py-1 h5 font-weight-bold">{{ repeatTime }}</p>
+                    </div>
+                </div>
                 <div class="word-content">
                     <div class="d-flex align-items-center">
                         <p class="ipa pr-4"> {{ wordItemRender.ipa}}</p>
@@ -107,6 +113,11 @@
                 wordList: [],
                 wordCurrentList: [],
                 wordItemRender: '',
+
+                wordIndex: 1,
+                wordTotal: 40,
+                repeatTime: 0,
+
                 time: 4,
                 soundFlag: false,
                 paginationInfo: [],
@@ -121,6 +132,9 @@
 
             this.wordList = await word.getWordListBySubjectId(this.subjectId);
             this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
+            this.wordCurrentList = this.wordTable.data;
+
+            this.wordTotal = this.wordTable.data.length;
             this.wordItemRender = this.wordTable.data[0];
         },
         mounted() {
@@ -168,16 +182,26 @@
                 this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
                 this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
                 this.soundClick();
+
+                this.repeatTime = 0;
+                this.wordIndex = 1;
+                this.wordTotal = this.wordTable.data.length;
             }
         },
         methods: {
             async nextWord(){
-                if(helpers.isEmptyObject(this.wordCurrentList)){
-                    this.wordCurrentList = this.wordTable.data;
-                }
                 this.wordItemRender = helpers.getRandomValues(this.wordCurrentList);
                 // remove current word from list
                 this.wordCurrentList = this.wordCurrentList.filter(item => !(item.id === this.wordItemRender.id));
+
+                if(helpers.isEmptyObject(this.wordCurrentList)){
+                    this.wordCurrentList = this.wordTable.data;
+                    this.repeatTime++;
+                    this.wordIndex = 1;
+                } else {
+                    this.wordIndex++;
+                }
+
                 await this.soundClick();
             },
             async clickItem(index){
