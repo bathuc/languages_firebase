@@ -57,9 +57,10 @@
                     <div class="d-none d-lg-block">
                         <p class="btn btn-primary ml-2 px-2 py-1 h5 font-weight-bold">{{ wordIndex }} / {{ wordTotal }}</p>
                         <p class="btn btn-success ml-2 px-2 py-1 h5 font-weight-bold">{{ repeatTime }}</p>
+                        <button class="btn btn-info ml-2 px-2 py-1 h5" @click="wordStatusCalculate">{{ wordStatus }}</button>
                     </div>
                 </div>
-                <div class="word-content">
+                <div class="word-content" v-bind:class="this.wordStatusClass">
                     <div class="d-flex align-items-center">
                         <p class="ipa pr-4"> {{ wordItemRender.ipa}}</p>
                         <span class="audio-play" @click="audioPlay"> audio
@@ -80,7 +81,7 @@
                     <p class="example"> {{ wordItemRender.example }} </p>
                     <p class=""> {{ wordItemRender.example1 }} </p>
                 </div>
-                <button type="button" class="btn btn-lg btn-primary" @click="nextWord">Next Word</button>
+                <button type="button" class="btn btn-lg btn-primary mt-3" @click="nextWord">Next Word</button>
             </div>
 
             <div class="table-render d-none d-lg-block col-lg-5" v-if="wordTable.tableRender">
@@ -121,6 +122,8 @@
                 wordIndex: 1,
                 wordTotal: 40,
                 repeatTime: 0,
+                wordStatus: 'show',
+                wordStatusClass: '',
 
                 time: 4,
                 soundFlag: false,
@@ -211,6 +214,16 @@
             async clickItem(index){
                 this.wordItemRender = this.wordTable.data[index];
                 await this.soundClick();
+            },
+            async wordStatusCalculate() {
+                if (this.wordStatus == 'show') {
+                    this.wordStatus = 'hide';
+                    this.wordStatusClass = 'd-none';
+                }
+                else {
+                    this.wordStatus = 'show';
+                    this.wordStatusClass = '';
+                }
             },
             async soundClick(){
                 if(this.soundFlag) {
