@@ -153,17 +153,17 @@
             });
 
             window.addEventListener('keydown', function(event) {
-                //  down arrow, play sound
+                //  down arrow, sound play
                 if (event.keyCode === 40) {
-                    me.audioPlay();
+                    console.log('sound  play');
+                    me.soundPlay();
                 }
             });
 
 	        window.addEventListener('keydown', function(event) {
-		        // up arrow, play sound
+		        // up arrow, audio sound
 		        if (event.keyCode === 38) {
-			        console.log('sound  play');
-			        me.soundPlay();
+                    me.audioPlay();
 		        }
 	        });
 
