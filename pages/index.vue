@@ -54,7 +54,7 @@
             <div class="col-12 col-lg-7" v-if="wordItemRender">
                 <div class="d-flex justify-content-between">
                     <span id="hira_show" @click="soundPlay">{{  wordItemRender.word }}</span>
-                    <div>
+                    <div class="d-none d-lg-block">
                         <p class="btn btn-primary ml-2 px-2 py-1 h5 font-weight-bold">{{ wordIndex }} / {{ wordTotal }}</p>
                         <p class="btn btn-success ml-2 px-2 py-1 h5 font-weight-bold">{{ repeatTime }}</p>
                     </div>
@@ -70,6 +70,10 @@
                               <path fill-rule="evenodd" d="M6.717 3.55A.5.5 0 017 4v8a.5.5 0 01-.812.39L3.825 10.5H1.5A.5.5 0 011 10V6a.5.5 0 01.5-.5h2.325l2.363-1.89a.5.5 0 01.529-.06z" clip-rule="evenodd"/>
                             </svg>
                         </span>
+                        <div class="d-lg-none">
+                            <p class="btn btn-primary ml-2 px-2 py-1 h5 font-weight-bold">{{ wordIndex }} / {{ wordTotal }}</p>
+                            <p class="btn btn-success ml-2 px-2 py-1 h5 font-weight-bold">{{ repeatTime }}</p>
+                        </div>
                     </div>
                     <p class="meaning text-success"> {{ wordItemRender.meaning}}</p>
                     <p class="definition"> {{ wordItemRender.definition }} </p>
