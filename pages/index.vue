@@ -166,6 +166,14 @@
 			        me.soundPlay();
 		        }
 	        });
+
+            window.addEventListener('keydown', function(event) {
+                // up arrow, play sound
+                if (event.keyCode === 37) {
+                    console.log('toggle show hide');
+                    me.wordStatusCalculate();
+                }
+            });
         },
         watch:{
              wordNumber: function(newValue){
