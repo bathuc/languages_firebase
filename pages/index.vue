@@ -141,7 +141,7 @@
             this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
             this.wordCurrentList = this.wordTable.data;
 
-            this.wordTotal = this.wordTable.data.length;
+            this.wordTotal = helpers.countArray(this.wordTable.data);
             this.wordItemRender = this.wordTable.data[0];
         },
         mounted() {
@@ -181,13 +181,13 @@
                 var isInt = Number.isInteger(number);
                 if(isInt) {
                     this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
-                    this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
+                    this.resetList(this.wordTable);
                     this.soundClick();
                 }
                 else{
                     // random case
                     this.wordTable = helpers.getWordSplitInfo(this.wordList, 1);
-                    this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
+                    this.resetList(this.wordTable);
                     this.soundClick();
                 }
             },
@@ -195,15 +195,18 @@
                 this.wordNumber = 1;
                 this.wordList = await word.getWordListBySubjectId(this.subjectId);
                 this.wordTable = helpers.getWordSplitInfo(this.wordList, this.wordNumber);
-                this.wordItemRender = this.wordTable.data[this.wordTable.first_index];
+                this.resetList(this.wordTable);
                 this.soundClick();
-
-                this.repeatTime = 0;
-                this.wordIndex = 1;
-                this.wordTotal = this.wordTable.data.length;
             }
         },
         methods: {
+            resetList(wordTable) {
+                this.wordItemRender = wordTable.data[wordTable.first_index];
+                this.wordCurrentList = wordTable.data;
+                this.repeatTime = 0;
+                this.wordIndex = 1;
+                this.wordTotal = helpers.countArray(wordTable.data);
+            },
             async nextWord(){
                 this.wordItemRender = helpers.getRandomValues(this.wordCurrentList);
                 // remove current word from list

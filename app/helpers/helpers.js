@@ -315,6 +315,15 @@ export default {
         return result;
     },
 
+    countArray(array) {
+        var count = 0;
+        array.forEach(item=>{
+            count++;
+        });
+
+        return count;
+    },
+
     getRandomArray(array) {
         var tempArray = this.cloneArray(array);
         tempArray.sort(function(a, b){return Math.random() - Math.random()});
