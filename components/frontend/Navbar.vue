@@ -53,12 +53,15 @@
             },
             wordClick(){
                 this.$router.push('/');
+                window.location.href = '/';
             },
             vietClick(){
                 this.$router.push('/viet');
+                window.location.href = '/viet';
             },
             phraseClick(){
                 this.$router.push('/phrase');
+                window.location.href = '/phrase';
             },
         }
     }
